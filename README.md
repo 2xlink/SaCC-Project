@@ -4,7 +4,7 @@
 
 Client: Android  
 Server: tomcat+jersey  
-DB: MySQL/PostgreSQL?
+DB: MySQL/PostgreSQL?  
 C-S Connection: REST/Json  
 S-DB Connection: JDBC/JPA?  
 
