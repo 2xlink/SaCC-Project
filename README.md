@@ -4,10 +4,10 @@
 
 Client: Android  
 Server: tomcat+jersey  
-DB: MySQL/PostgreSQL?  
-C-S Connection: REST/Json  
+DB: MySQL/PostgreSQL [2]  
+C-S Connection: REST/Json [1]  
 S-DB Connection: JDBC/JPA?  
 
-http://www.vogella.com/tutorials/REST/article.html
+[1] http://www.vogella.com/tutorials/REST/article.html
 
-https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems
+[2] https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems
