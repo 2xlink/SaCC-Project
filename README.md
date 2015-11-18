@@ -16,3 +16,6 @@ S-DB Connection: JDBC/JPA?
 according to vogella ...  
 Tomcat 8.0.28 (https://tomcat.apache.org/download-80.cgi)  
 Jersey 2.22.1 (https://jersey.java.net/download.html)  
+
+#### Server Repo  
+https://github.com/2xlink/PaYourShare-Server  
