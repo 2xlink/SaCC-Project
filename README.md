@@ -1,6 +1,4 @@
-# SaCC-Project
-
-### Gruppenrechnung (App um Rechnungen auf Gruppen zu verteilen)
+# PaYourShare main repo
 
 Client: Android  
 Server: tomcat+jersey  
@@ -14,8 +12,13 @@ S-DB Connection: JDBC/JPA?
 
 #### Project Setup
 according to vogella ...  
-Tomcat 8.0.28 (https://tomcat.apache.org/download-80.cgi)  
-Jersey 2.22.1 (https://jersey.java.net/download.html)  
+ - Tomcat 8.0.28 (https://tomcat.apache.org/download-80.cgi)  
+ - Jersey 2.22.1 (https://jersey.java.net/download.html)  
+ - JAX-RS for REST annotation support in java
 
 #### Server Repo  
 https://github.com/2xlink/PaYourShare-Server  
+
+#### API Dienstbeschreibung
+- Swagger or
+- WADL
