@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 02. Dez 2015 um 21:22
+-- Erstellungszeit: 08. Dez 2015 um 16:32
 -- Server-Version: 10.1.8-MariaDB
 -- PHP-Version: 5.6.14
 
@@ -27,10 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ausgaben` (
-  `idbetrag` int(20) NOT NULL,
+  `idbetrag` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
   `betrag` int(20) NOT NULL,
-  `iduser` int(20) NOT NULL
+  `iduser` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -38,8 +38,8 @@ CREATE TABLE `ausgaben` (
 --
 
 INSERT INTO `ausgaben` (`idbetrag`, `name`, `betrag`, `iduser`) VALUES
-(1, 'Ticket', 40, 1),
-(2, 'Popcorn', 5, 1);
+('1', 'Ticket', 40, '1'),
+('2', 'Popcorn', 5, '1');
 
 -- --------------------------------------------------------
 
@@ -48,9 +48,9 @@ INSERT INTO `ausgaben` (`idbetrag`, `name`, `betrag`, `iduser`) VALUES
 --
 
 CREATE TABLE `ausgabenuser` (
-  `idausgabenuser` int(20) NOT NULL,
-  `iduser` int(20) NOT NULL,
-  `idbetrag` int(20) NOT NULL,
+  `idausgabenuser` varchar(40) NOT NULL,
+  `iduser` varchar(40) NOT NULL,
+  `idbetrag` varchar(40) NOT NULL,
   `betrag` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -59,9 +59,9 @@ CREATE TABLE `ausgabenuser` (
 --
 
 INSERT INTO `ausgabenuser` (`idausgabenuser`, `iduser`, `idbetrag`, `betrag`) VALUES
-(1, 1, 1, 10),
-(2, 2, 1, 30),
-(3, 1, 2, 5);
+('1', '1', '1', 10),
+('2', '2', '1', 30),
+('3', '1', '2', 5);
 
 -- --------------------------------------------------------
 
@@ -70,9 +70,9 @@ INSERT INTO `ausgabenuser` (`idausgabenuser`, `iduser`, `idbetrag`, `betrag`) VA
 --
 
 CREATE TABLE `event` (
-  `idevent` int(100) NOT NULL,
+  `idevent` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `idmoderator` int(20) NOT NULL
+  `idmoderator` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -80,8 +80,10 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`idevent`, `name`, `idmoderator`) VALUES
-(1, 'Musik', 1),
-(2, 'Film', 1);
+('1', 'Musik', '1'),
+('2', 'Film', '1'),
+('5cc8597f-fce9-40e1-9935-c5836d1aa6f0', 'Zug', '3'),
+('a58c3fa5-488c-4526-b299-7fe5ff598e09', 'Zug', '3');
 
 -- --------------------------------------------------------
 
@@ -90,9 +92,9 @@ INSERT INTO `event` (`idevent`, `name`, `idmoderator`) VALUES
 --
 
 CREATE TABLE `eventuser` (
-  `ideventuser` int(11) NOT NULL,
-  `idevent` int(11) NOT NULL,
-  `iduser` int(11) NOT NULL
+  `ideventuser` varchar(40) NOT NULL,
+  `idevent` varchar(40) NOT NULL,
+  `iduser` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -100,9 +102,10 @@ CREATE TABLE `eventuser` (
 --
 
 INSERT INTO `eventuser` (`ideventuser`, `idevent`, `iduser`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 2, 1);
+('1', '1', '1'),
+('2', '1', '2'),
+('3', '2', '1'),
+('4', 'a58c3fa5-488c-4526-b299-7fe5ff598e09', '3');
 
 -- --------------------------------------------------------
 
@@ -111,7 +114,7 @@ INSERT INTO `eventuser` (`ideventuser`, `idevent`, `iduser`) VALUES
 --
 
 CREATE TABLE `user` (
-  `iduser` int(100) NOT NULL,
+  `iduser` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -121,9 +124,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`iduser`, `name`, `email`) VALUES
-(1, 'Schmidt', 'test1@test.de'),
-(2, 'Meier', 'test2@test.de'),
-(3, 'Wurst', 'test3@test.de');
+('1', 'Schmidt', 'test1@test.de'),
+('2', 'Meier', 'test2@test.de'),
+('3', 'Wurst', 'test3@test.de');
 
 -- --------------------------------------------------------
 
@@ -132,7 +135,7 @@ INSERT INTO `user` (`iduser`, `name`, `email`) VALUES
 --
 
 CREATE TABLE `userlogin` (
-  `iduser` int(20) NOT NULL,
+  `iduser` varchar(40) NOT NULL,
   `password` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -142,9 +145,9 @@ CREATE TABLE `userlogin` (
 --
 
 INSERT INTO `userlogin` (`iduser`, `password`, `email`) VALUES
-(1, '1234', 'test1@test.de'),
-(2, '1234', 'test2@test.de'),
-(3, '1234', 'test3@test.de');
+('1', 'pw1', 'test1@test.de'),
+('2', 'pw2', 'test2@test.de'),
+('3', 'pw3', 'test3@test.de');
 
 --
 -- Indizes der exportierten Tabellen
@@ -184,7 +187,8 @@ ALTER TABLE `user`
 -- Indizes für die Tabelle `userlogin`
 --
 ALTER TABLE `userlogin`
-  ADD PRIMARY KEY (`iduser`);
+  ADD PRIMARY KEY (`iduser`),
+  ADD UNIQUE KEY `email` (`email`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
