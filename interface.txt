@@ -1,0 +1,232 @@
+***********
+** Login **
+***********
+path: /server/rest/user/login
+
+Client -> Server (Form)
+{
+	"email": "email",
+	"password": "pass"
+}
+
+Server -> Client (JSON)
+{
+	"status": "true" | "false",
+	"id" : "user_id",
+	"token": "token"
+}
+
+**************
+** Register **
+**************
+path: /server/rest/user/register
+
+Client -> Server (Form)
+{
+	"email": "user_email",
+	"password": "password"
+}
+
+Server - > Client (JSON)
+{
+	"status": "true" | "error_msg",
+	"id": "user_id",
+	"token": "token"
+}
+
+****************
+** UserExists **
+****************
+path: /server/rest/user/exists
+
+Client -> Server (Form)
+{
+	"id": "id_user",
+	"email": "email_to_check"
+}
+
+Server -> Client (JSON)
+{
+	"status": "true" | "false",
+	"id": "user_id"
+}
+
+****************
+** LoadEvents **
+****************
+path: /server/rest/user/getEvents/{user_id}
+
+Client -> Server (Form)
+{
+	"token": "user_token"
+}
+
+Server -> Client (List von Events)
+{
+	"status": "true" | "false",
+	"events": [{
+		"id" : "event_id",
+		"name": "event_name",
+		"description": "event_desc",
+		"creatorId": "id_creator"
+		"user": [{
+						"email": "email",
+						"id": "user_id"
+					 },
+					 {
+						...
+					 },
+					 ...
+					],
+		"expenses": [{
+							"id": "exp_id",
+							"name": "exp_name",
+							"type": "exp_type",
+							"amount": "exp_amount",
+							"creatorId": "id_creator",
+							"shares": [{
+											"id": "user_id"
+											"share": "user_share"
+										  },
+										  {
+											...
+										  },
+										  ...
+										]
+	 },
+	 {
+	 	...
+	 },
+	 ...
+	]
+}
+
+*****************
+** CreateEvent **
+*****************
+path: /server/rest/event/create
+
+Client -> Server (JSON)
+{
+	"token": "token",
+	"id": "event_id",
+	"name": "event_name",
+	"desc": "event_desc",
+	"creatorId": "id_creator",
+	"version": "version",
+	"users": [{
+					"email": "email",
+					"id": "user_id"
+				 },
+				 {
+					...
+				 },
+				 ...
+				]
+ }
+
+Server -> Client (JSON)
+{
+	"status": "true" | "false"
+	"id": "event_id"
+}
+
+*****************
+** UpdateEvent **
+*****************
+path: /server/rest/event/update
+
+Client -> Server (JSON)
+{
+	"token": "token",
+	"id": "event_id",
+	"name": "event_name",
+	"desc": "event_desc",
+	"creatorId": "id_creator",
+	"version": "version",
+	"users": [{
+					"email": "email",
+					"id": "user_id"
+				 },
+				 {
+					...
+				 },
+				 ...
+				]
+ }
+
+Server -> Client (JSON)
+{
+	"status": "true" | "false"
+}
+ 
+*****************
+** LoadExpense **
+*****************
+path: /server/rest/load
+
+
+*******************
+** CreateExpense **
+*******************
+path: /server/rest/expense/create
+
+Client -> Server (JSON)
+{
+	"token": "token",
+	"id": "exp_id",
+	"id_event": "event_id",
+	"name": "exp_name",
+	"type": "exp_type",
+	"amount": "exp_amount",
+	"creatorId": "id_creator",
+	"version": "version",
+	"shares": [{
+					"id": "user_id"
+					"share": "user_share"
+				 },
+				 {
+					...
+				 },
+				 ...
+				]
+}
+ 
+Server -> Client (JSON)
+{
+	"status": "true" | "false",
+	"id": "expense_id"
+}
+
+*******************
+** UpdateExpense **
+*******************
+path: /server/rest/expense/update
+
+Client -> Server (JSON)
+{
+	"token": "token",
+	"id": "expense_id",
+	"id_event": "event_id",
+	"name": "exp_name",
+	"type": "exp_type",
+	"amount": "exp_amount",
+	"creatorId": "id_creator",
+	"version": "version",
+	"shares": [{
+					"id": "user_id"
+					"share": "user_share"
+				 },
+				 {
+					...
+				 },
+				 ...
+				]
+}
+ 
+Server -> Client (JSON)
+{
+	"status": "true" | "false"
+}
+ 	
+	
