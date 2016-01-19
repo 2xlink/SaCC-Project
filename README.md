@@ -1,5 +1,16 @@
 # PaYourShare main repo
 
+#### Server Repo  
+https://github.com/2xlink/PaYourShare-Server  
+
+#### API Dienstbeschreibung
+- Swagger or
+- WADL
+
+#### Securing the WS
+- Authentication: token / API key
+- Confidentiality: HTTPS
+
 Client: Android  
 Server: tomcat+jersey  
 DB: MySQL/PostgreSQL [2]  
@@ -15,10 +26,3 @@ according to vogella ...
  - Tomcat 8.0.28 (https://tomcat.apache.org/download-80.cgi)  
  - Jersey 2.22.1 (https://jersey.java.net/download.html)  
  - JAX-RS for REST annotation support in java
-
-#### Server Repo  
-https://github.com/2xlink/PaYourShare-Server  
-
-#### API Dienstbeschreibung
-- Swagger or
-- WADL
