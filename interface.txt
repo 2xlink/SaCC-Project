@@ -3,7 +3,7 @@
 ***********
 path: /server/rest/user/login
 
-Client -> Server (Form)
+Client -> Server (JSON)
 {
 	"email": "email",
 	"password": "pass"
@@ -21,16 +21,16 @@ Server -> Client (JSON)
 **************
 path: /server/rest/user/register
 
-Client -> Server (Form)
+Client -> Server (JSON)
 {
 	"email": "user_email",
-	"password": "password"
+	"password": "password",
+	"id": "user_id",
 }
 
 Server - > Client (JSON)
 {
 	"status": "true" | "error_msg",
-	"id": "user_id",
 	"token": "token"
 }
 
@@ -39,9 +39,8 @@ Server - > Client (JSON)
 ****************
 path: /server/rest/user/exists
 
-Client -> Server (Form)
+Client -> Server (JSON)
 {
-	"id": "id_user",
 	"email": "email_to_check"
 }
 
@@ -68,7 +67,8 @@ Server -> Client (List von Events)
 		"id" : "event_id",
 		"name": "event_name",
 		"description": "event_desc",
-		"creatorId": "id_creator"
+		"creatorId": "id_creator",
+		"version": "version",
 		"user": [{
 						"email": "email",
 						"id": "user_id"
@@ -84,6 +84,7 @@ Server -> Client (List von Events)
 							"type": "exp_type",
 							"amount": "exp_amount",
 							"creatorId": "id_creator",
+							"version": "version",
 							"shares": [{
 											"id": "user_id"
 											"share": "user_share"
@@ -128,7 +129,6 @@ Client -> Server (JSON)
 Server -> Client (JSON)
 {
 	"status": "true" | "false"
-	"id": "event_id"
 }
 
 *****************
@@ -194,8 +194,7 @@ Client -> Server (JSON)
  
 Server -> Client (JSON)
 {
-	"status": "true" | "false",
-	"id": "expense_id"
+	"status": "true" | "false"
 }
 
 *******************
