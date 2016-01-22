@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 08. Dez 2015 um 16:32
+-- Erstellungszeit: 22. Jan 2016 um 15:45
 -- Server-Version: 10.1.8-MariaDB
 -- PHP-Version: 5.6.14
 
@@ -27,19 +27,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ausgaben` (
-  `idbetrag` varchar(40) NOT NULL,
+  `idexpense` varchar(40) NOT NULL,
+  `idevent` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `betrag` int(20) NOT NULL,
-  `iduser` varchar(40) NOT NULL
+  `idcreator` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `ausgaben`
 --
 
-INSERT INTO `ausgaben` (`idbetrag`, `name`, `betrag`, `iduser`) VALUES
-('1', 'Ticket', 40, '1'),
-('2', 'Popcorn', 5, '1');
+INSERT INTO `ausgaben` (`idexpense`, `idevent`, `name`, `description`, `betrag`, `idcreator`) VALUES
+('002', '1', 'Test2erfolgreich', 'platzhalter', 60, '1'),
+('1', '2', 'Tickets', 'Test', 60, '1'),
+('16da1252-f8bc-4241-953e-646477118f86', '3', 'Test', 'Test', 25, '3'),
+('2', '2', 'Popcorn', 'Test', 5, '1');
 
 -- --------------------------------------------------------
 
@@ -48,20 +52,23 @@ INSERT INTO `ausgaben` (`idbetrag`, `name`, `betrag`, `iduser`) VALUES
 --
 
 CREATE TABLE `ausgabenuser` (
-  `idausgabenuser` varchar(40) NOT NULL,
+  `idexpenseuser` varchar(40) NOT NULL,
   `iduser` varchar(40) NOT NULL,
-  `idbetrag` varchar(40) NOT NULL,
-  `betrag` int(20) NOT NULL
+  `idexpense` varchar(40) NOT NULL,
+  `betrag` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `ausgabenuser`
 --
 
-INSERT INTO `ausgabenuser` (`idausgabenuser`, `iduser`, `idbetrag`, `betrag`) VALUES
-('1', '1', '1', 10),
-('2', '2', '1', 30),
-('3', '1', '2', 5);
+INSERT INTO `ausgabenuser` (`idexpenseuser`, `iduser`, `idexpense`, `betrag`) VALUES
+('1', '1', '1', '10'),
+('2', '2', '1', '30'),
+('3', '1', '2', '5'),
+('39dd695d-ec7b-4468-a296-0741f03325ef', '1', '002', '10'),
+('3cbb6799-4036-4619-b936-ab2b469a0112', '3', '16da1252-f8bc-4241-953e-646477118f86', '25'),
+('f7344b65-02ad-4fd1-bc89-6c7ed190a06c', '2', '002', '50');
 
 -- --------------------------------------------------------
 
@@ -72,6 +79,7 @@ INSERT INTO `ausgabenuser` (`idausgabenuser`, `iduser`, `idbetrag`, `betrag`) VA
 CREATE TABLE `event` (
   `idevent` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
+  `description` varchar(40) NOT NULL,
   `idmoderator` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -79,11 +87,10 @@ CREATE TABLE `event` (
 -- Daten für Tabelle `event`
 --
 
-INSERT INTO `event` (`idevent`, `name`, `idmoderator`) VALUES
-('1', 'Musik', '1'),
-('2', 'Film', '1'),
-('5cc8597f-fce9-40e1-9935-c5836d1aa6f0', 'Zug', '3'),
-('a58c3fa5-488c-4526-b299-7fe5ff598e09', 'Zug', '3');
+INSERT INTO `event` (`idevent`, `name`, `description`, `idmoderator`) VALUES
+('1', 'Musik1', 'platzhalter', '1'),
+('2', 'Film', 'platzhalter', '1'),
+('acef023d-5574-416e-b9a4-e88f3232315b', 'Zug', 'platzhalter', '3');
 
 -- --------------------------------------------------------
 
@@ -103,9 +110,10 @@ CREATE TABLE `eventuser` (
 
 INSERT INTO `eventuser` (`ideventuser`, `idevent`, `iduser`) VALUES
 ('1', '1', '1'),
+('11f1c0cd-bbb4-499c-9c96-673c67070a3d', '2', '3'),
 ('2', '1', '2'),
 ('3', '2', '1'),
-('4', 'a58c3fa5-488c-4526-b299-7fe5ff598e09', '3');
+('64a62152-6b0f-4c8a-b34f-d7561a0a8d11', 'acef023d-5574-416e-b9a4-e88f3232315b', '3');
 
 -- --------------------------------------------------------
 
@@ -126,7 +134,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`iduser`, `name`, `email`) VALUES
 ('1', 'Schmidt', 'test1@test.de'),
 ('2', 'Meier', 'test2@test.de'),
-('3', 'Wurst', 'test3@test.de');
+('3', 'Wurst', 'test3@test.de'),
+('5668cc25-8862-49c3-afa3-37ec048c7b61', 'Gustaf', 'test4@test.de');
 
 -- --------------------------------------------------------
 
@@ -137,17 +146,19 @@ INSERT INTO `user` (`iduser`, `name`, `email`) VALUES
 CREATE TABLE `userlogin` (
   `iduser` varchar(40) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL
+  `email` varchar(20) NOT NULL,
+  `token` varchar(90) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `userlogin`
 --
 
-INSERT INTO `userlogin` (`iduser`, `password`, `email`) VALUES
-('1', 'pw1', 'test1@test.de'),
-('2', 'pw2', 'test2@test.de'),
-('3', 'pw3', 'test3@test.de');
+INSERT INTO `userlogin` (`iduser`, `password`, `email`, `token`) VALUES
+('1', 'pw1', 'test1@test.de', 'token1'),
+('2', 'pw2', 'test2@test.de', 'token2'),
+('3', 'pw3', 'test3@test.de', 'token3'),
+('5668cc25-8862-49c3-afa3-37ec048c7b61', 'pw4', 'test4@test.de', 'token4');
 
 --
 -- Indizes der exportierten Tabellen
@@ -157,13 +168,13 @@ INSERT INTO `userlogin` (`iduser`, `password`, `email`) VALUES
 -- Indizes für die Tabelle `ausgaben`
 --
 ALTER TABLE `ausgaben`
-  ADD PRIMARY KEY (`idbetrag`);
+  ADD PRIMARY KEY (`idexpense`);
 
 --
 -- Indizes für die Tabelle `ausgabenuser`
 --
 ALTER TABLE `ausgabenuser`
-  ADD PRIMARY KEY (`idausgabenuser`);
+  ADD PRIMARY KEY (`idexpenseuser`);
 
 --
 -- Indizes für die Tabelle `event`
