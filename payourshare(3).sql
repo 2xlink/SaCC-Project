@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Jan 2016 um 15:45
+-- Erstellungszeit: 22. Jan 2016 um 16:28
 -- Server-Version: 10.1.8-MariaDB
 -- PHP-Version: 5.6.14
 
@@ -145,9 +145,9 @@ INSERT INTO `user` (`iduser`, `name`, `email`) VALUES
 
 CREATE TABLE `userlogin` (
   `iduser` varchar(40) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `token` varchar(90) NOT NULL
+  `token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `userlogin` (
 --
 
 INSERT INTO `userlogin` (`iduser`, `password`, `email`, `token`) VALUES
-('1', 'pw1', 'test1@test.de', 'token1'),
+('1', 'pw1', 'test1@test.de', 'Token1erfolg'),
 ('2', 'pw2', 'test2@test.de', 'token2'),
 ('3', 'pw3', 'test3@test.de', 'token3'),
 ('5668cc25-8862-49c3-afa3-37ec048c7b61', 'pw4', 'test4@test.de', 'token4');
