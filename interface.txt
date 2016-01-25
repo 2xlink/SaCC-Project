@@ -48,13 +48,12 @@ Server -> Client (JSON)
 {
 	"status": "true" | "false",
 	"id": "user_id"
-} TODO: server gibt id oder false
+}
 
 ****************
 ** LoadEvents **
 ****************
-path: /server/rest/user/getEvents/{user_id}
-TODO: user_id nicht im Pfad, nicht vereinbar mit JSON als Eingabe
+path: /server/rest/user/getEvents/
 Client -> Server (Form)
 {
 	"token": "user_token"
@@ -62,7 +61,6 @@ Client -> Server (Form)
 
 Server -> Client (List von Events)
 {
-TODO: status notwendig?
 	"status": "true" | "false",
 	"events": [{
 		"id" : "event_id",
@@ -115,7 +113,6 @@ Client -> Server (JSON)
 	"name": "event_name",
 	"desc": "event_desc",
 	"creatorId": "id_creator",
-	TODO: id_creator = tokenId?
 	"version": "version",
 	"users": [{
 					"email": "email",
@@ -177,15 +174,15 @@ Client -> Server (JSON)
 {
 	"token": "token",
 	"id": "exp_id",
-	"id_event": "event_id",
+	"eventId": "event_id",
 	"name": "exp_name",
 	"type": "exp_type",
 	"amount": "exp_amount",
 	"creatorId": "id_creator",
 	"version": "version",
 	"shares": [{
-					Map(user -> share)
-					TODO: Abklären
+					"id": "user_id"
+					"share": "user_share"
 				 },
 				 {
 					...
@@ -208,7 +205,7 @@ Client -> Server (JSON)
 {
 	"token": "token",
 	"id": "expense_id",
-	"id_event": "event_id",
+	"eventId": "event_id",
 	"name": "exp_name",
 	"type": "exp_type",
 	"amount": "exp_amount",
