@@ -1,0 +1,15 @@
+Zeige alle Events (Name/ID) des Users mit der ID=1
+
+SELECT ev.name, ev.idevent
+FROM user us
+join eventuser eu on us.iduser = eu.iduser
+join event ev on ev.idevent = eu.idevent
+WHERE us.iduser = 1
+
+Zeige alle Usernamen der Ausgabe "Ticket"
+
+Select us.name
+From user us
+join ausgabenuser au on au.iduser = us.iduser
+join ausgaben ag on au.idbetrag = ag.idbetrag
+Where ag.name = 'Ticket'
