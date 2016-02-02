@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Jan 2016 um 16:28
+-- Erstellungszeit: 01. Feb 2016 um 17:53
 -- Server-Version: 10.1.8-MariaDB
 -- PHP-Version: 5.6.14
 
@@ -31,19 +31,20 @@ CREATE TABLE `ausgaben` (
   `idevent` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `betrag` int(20) NOT NULL,
-  `idcreator` varchar(40) NOT NULL
+  `betrag` varchar(40) NOT NULL,
+  `idcreator` varchar(40) NOT NULL,
+  `version` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `ausgaben`
 --
 
-INSERT INTO `ausgaben` (`idexpense`, `idevent`, `name`, `description`, `betrag`, `idcreator`) VALUES
-('002', '1', 'Test2erfolgreich', 'platzhalter', 60, '1'),
-('1', '2', 'Tickets', 'Test', 60, '1'),
-('16da1252-f8bc-4241-953e-646477118f86', '3', 'Test', 'Test', 25, '3'),
-('2', '2', 'Popcorn', 'Test', 5, '1');
+INSERT INTO `ausgaben` (`idexpense`, `idevent`, `name`, `description`, `betrag`, `idcreator`, `version`) VALUES
+('002', '1', 'Test2erfolgreich', 'platzhalter', '60', '1', '0'),
+('1', '2', 'Tickets', 'Test', '60', '1', '0'),
+('16da1252-f8bc-4241-953e-646477118f86', '3', 'Test', 'Test', '25', '3', '0'),
+('2', '2', 'Popcorn', 'Test', '5', '1', '0');
 
 -- --------------------------------------------------------
 
@@ -63,11 +64,10 @@ CREATE TABLE `ausgabenuser` (
 --
 
 INSERT INTO `ausgabenuser` (`idexpenseuser`, `iduser`, `idexpense`, `betrag`) VALUES
-('1', '1', '1', '10'),
-('2', '2', '1', '30'),
 ('3', '1', '2', '5'),
 ('39dd695d-ec7b-4468-a296-0741f03325ef', '1', '002', '10'),
 ('3cbb6799-4036-4619-b936-ab2b469a0112', '3', '16da1252-f8bc-4241-953e-646477118f86', '25'),
+('c2dcfb5d-f263-447b-81bd-8a0d1d01f034', '1', '1', '30'),
 ('f7344b65-02ad-4fd1-bc89-6c7ed190a06c', '2', '002', '50');
 
 -- --------------------------------------------------------
@@ -80,17 +80,18 @@ CREATE TABLE `event` (
   `idevent` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
   `description` varchar(40) NOT NULL,
-  `idmoderator` varchar(40) NOT NULL
+  `idmoderator` varchar(40) NOT NULL,
+  `version` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `event`
 --
 
-INSERT INTO `event` (`idevent`, `name`, `description`, `idmoderator`) VALUES
-('1', 'Musik1', 'platzhalter', '1'),
-('2', 'Film', 'platzhalter', '1'),
-('acef023d-5574-416e-b9a4-e88f3232315b', 'Zug', 'platzhalter', '3');
+INSERT INTO `event` (`idevent`, `name`, `description`, `idmoderator`, `version`) VALUES
+('1', 'Musik1', 'platzhalter', '1', '0'),
+('2', 'Zug1', 'platzhalter', '1', '0'),
+('acef023d-5574-416e-b9a4-e88f3232315b', 'Zug', 'platzhalter', '3', '0');
 
 -- --------------------------------------------------------
 
@@ -109,11 +110,12 @@ CREATE TABLE `eventuser` (
 --
 
 INSERT INTO `eventuser` (`ideventuser`, `idevent`, `iduser`) VALUES
+('051f1439-14fd-49a8-82f2-f672146893ce', '2', '2'),
+('05d9d032-5e7c-46a8-acc2-66ba43c7a7c3', '2', '3'),
 ('1', '1', '1'),
-('11f1c0cd-bbb4-499c-9c96-673c67070a3d', '2', '3'),
 ('2', '1', '2'),
-('3', '2', '1'),
-('64a62152-6b0f-4c8a-b34f-d7561a0a8d11', 'acef023d-5574-416e-b9a4-e88f3232315b', '3');
+('64a62152-6b0f-4c8a-b34f-d7561a0a8d11', 'acef023d-5574-416e-b9a4-e88f3232315b', '3'),
+('9ad94ddc-5296-4005-8fcd-89aca63f9359', '2', '1');
 
 -- --------------------------------------------------------
 
@@ -156,7 +158,7 @@ CREATE TABLE `userlogin` (
 
 INSERT INTO `userlogin` (`iduser`, `password`, `email`, `token`) VALUES
 ('1', 'pw1', 'test1@test.de', 'Token1erfolg'),
-('2', 'pw2', 'test2@test.de', 'token2'),
+('2', 'pw2', 'test2@test.de', 'null'),
 ('3', 'pw3', 'test3@test.de', 'token3'),
 ('5668cc25-8862-49c3-afa3-37ec048c7b61', 'pw4', 'test4@test.de', 'token4');
 
