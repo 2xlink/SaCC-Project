@@ -1,5 +1,5 @@
 Installation steps
-- install tomcat version 8
+- install tomcat version 8.0.28
 - pull or unpack payourshare-server.war
 - modify the server.xml:
     1. Change the root path of the project in line 133 to:
