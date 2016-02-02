@@ -1,0 +1,192 @@
+All requests and responses are in JSON format
+http://www.w3schools.com/json/
+
+***********
+** Login **
+***********
+path: /server/rest/user/login
+
+Client -> Server (JSON)
+{
+	"email": String,
+	"password": String
+}
+
+Server -> Client (JSON)
+{
+	"status": String,
+	"id" : String,
+	"token": String
+}
+
+**************
+** Register **
+**************
+path: /server/rest/user/register
+
+Client -> Server (JSON)
+{
+	"email": String,
+	"password": String,
+	"id": String
+}
+
+Server - > Client (JSON)
+{
+	"status": String,
+	"token": String
+}
+
+****************
+** UserExists **
+****************
+path: /server/rest/user/exists
+
+Client -> Server (JSON)
+{
+	"email": String
+}
+
+Server -> Client (JSON)
+{
+	"status": String,
+	"id": String
+}
+
+****************
+** LoadEvents **
+****************
+path: /server/rest/user/getEvents/
+Client -> Server (JSON)
+{
+	"token": String
+}
+
+Server -> Client (List of Events)
+{
+	"status": String,
+	"events": List<Event>
+}
+
+*****************
+** CreateEvent **
+*****************
+path: /server/rest/event/create
+
+Client -> Server (JSON)
+{
+	"token": String,
+	"id": String,
+	"name": String,
+	"desc": String,
+	"creatorId": String,
+	"version": String,
+	"users": List<User>
+ }
+
+Server -> Client (JSON)
+{
+	"status": String
+}
+
+*****************
+** UpdateEvent **
+*****************
+path: /server/rest/event/update
+
+Client -> Server (JSON)
+{
+	"token": String,
+	"id": String,
+	"name": String,
+	"desc": String,
+	"creatorId": String,
+	"version": String,
+	"users": List<User>
+	"expenses": List<Expense>
+ }
+
+Server -> Client (JSON)
+{
+	"status": String
+}
+
+*******************
+** CreateExpense **
+*******************
+path: /server/rest/expense/create
+
+Client -> Server (JSON)
+{
+	"token": String,
+	"id": String,
+	"eventId": String,
+	"name": String,
+	"type": String,
+	"amount": String,
+	"creatorId": String,
+	"version": String,
+	"shares": List<Share>
+}
+ 
+Server -> Client (JSON)
+{
+	"status": Status
+}
+
+*******************
+** UpdateExpense **
+*******************
+path: /server/rest/expense/update
+
+Client -> Server (JSON)
+{
+	"token": String,
+	"id": String,
+	"eventId": String,
+	"name": String,
+	"type": String,
+	"amount": String,
+	"creatorId": String,
+	"version": String,
+	"shares": List<Share>
+}
+ 
+Server -> Client (JSON)
+{
+	"status": String
+}
+
+	
+Objects:
+========
+
+User :{
+	"email": String,
+	"id": String
+}
+
+Event :{
+	"id" : String,
+	"name": String,
+	"description": String,
+	"creatorId": String,
+	"version": String,
+	"users": List<User>,
+	"expenses": List<Expense>
+}
+
+Expense :{
+	"id": String,
+	"name": String,
+	"type": String,
+	"amount": String,
+	"creatorId": String,
+	"version": String,
+	"shares": List<Share>
+}
+
+Share :{
+	"id": String,
+	"share": String
+}
