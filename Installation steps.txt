@@ -2,7 +2,7 @@ Installation steps
 1. install tomcat version 8.0.28
 2. pull or unpack payourshare-server.war
 3. modify the server.xml:
-    3.1 Change the root path of the project in line 133 to:
+    3.1 Change the root path of the project to:
         <Context docBase="payourshare-server" path="/server" reloadable="true" source="org.eclipse.jst.jee.server:payourshare-server"/></Host>
     3.2 Configuring HTTPS:
         Define a new Connector, for example:
