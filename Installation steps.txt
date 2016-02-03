@@ -4,10 +4,17 @@ Installation steps
 3. modify the server.xml:
     3.1 Change the root path of the project in line 133 to:
         <Context docBase="payourshare-server" path="/server" reloadable="true" source="org.eclipse.jst.jee.server:payourshare-server"/></Host>
-    3.2 Change the path for the keystore in line 84 so that it points to your keystore:
-        keystoreFile="/path/to/your/keystore/key-server"
+    3.2 Configuring HTTPS:
+        Define a new Connector, for example:
+
+        <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+               maxThreads="150" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" 
+        keystoreFile="/path/to/your/keystore/key"
+        keystorePass="password_for_your_key" />
+
+        Change the path and password for the keystore according to your setup
         
-        if you use your own keys you should also change the pass in line 85 according to your setup
         (for additional info look here: http://www.mkyong.com/tomcat/how-to-configure-tomcat-to-support-ssl-or-https/)
 4. create a database user "payourshare" or modify /payourshare-server/src/entities/SQLNames.java
 5. import the sql schema (payourshare-cleaned.sql) for your user
